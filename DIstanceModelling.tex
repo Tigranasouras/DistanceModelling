@@ -1,0 +1,259 @@
+\documentclass[12pt]{article}
+
+% Basic math support
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsfonts, amssymb}
+
+% Page setup
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{float}
+
+% for images
+\usepackage{graphicx}
+
+% Metadata
+\title{MTH/CSC 4150 \\ Fall 2025 \\ Draft Project Report:\\
+Mathematically Modeling a Distance Runner's Race with Interpolation}
+\author{Daron Baltazar, Madi Price, Evan Dant}
+\date{Tuesday, November 11th}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Distance runners and coaches frequently analyze split times recorded at
+specific checkpoints in a race. These discrete measurements provide
+partial information about the race, but the runner's pace, velocity, and
+acceleration change continuously between checkpoints. The goal of this
+project is to reconstruct a smooth approximation of the runner's motion
+from split data using interpolation and to use numerical differentiation
+to study pacing behavior throughout the race.
+
+We model the runner's cumulative distance as a function of time,
+denoted by $s(t)$. From this interpolated position function, we
+approximate the instantaneous velocity $v(t)$ and acceleration $a(t)$.
+We compare several interpolation approaches studied in class, including
+Lagrange and Newton interpolating polynomials and natural cubic splines.
+We then examine how the choice of method influences the estimates of
+velocity and acceleration and how well each method captures realistic
+pacing patterns.
+
+\section{Theoretical Background}
+
+\subsection{Polynomial Interpolation}
+Suppose there are $n+1$ data points $(t_i, s_i)$ with distinct time
+values $t_0 < t_1 < \dots < t_n$. An interpolating polynomial
+$p_n(t)$ of degree n that satisfies
+\begin{equation}
+p_n(t_i) = s_i, \qquad i = 0,1,\dots,n.
+\label{eq:interp_condition}
+\end{equation}
+There exists a unique polynomial of at most n that satisfies
+ the equation.
+\\
+
+In the Lagrange form,
+\begin{equation}
+p_n(t) = \sum_{i=0}^{n} s_i L_i(t),
+\label{eq:lagrange_poly}
+\end{equation}
+where the Lagrange basis polynomials are
+\begin{equation}
+L_i(t) = \prod_{\substack{j=0 \\ j \neq i}}^{n}
+\frac{t - t_j}{t_i - t_j}, \qquad i = 0,1,\dots,n.
+\label{eq:lagrange_basis}
+\end{equation}
+This basis is interpolatory, since $L_i(t_j) = \delta_{ij}$.
+\\
+
+In Newton's form, an alternative basis is used:
+\begin{equation}
+p_n(t) =
+a_0 + a_1 (t - t_0) + a_2 (t - t_0)(t - t_1) + \dots +
+a_n \prod_{k=0}^{n-1} (t - t_k),
+\label{eq:newton_poly}
+\end{equation}
+where the coefficients $a_i$ are computed from divided differences. Newton's form is more convenient for computation and for updating the
+polynomial when additional data points are added.
+
+\subsection{Interpolation Error}
+Let $f(t)$ be a sufficiently smooth function and let $p_n(t)$ be the
+degree-$n$ interpolating polynomial constructed from $n+1$ distinct
+nodes $t_0,\dots,t_n$. The interpolation error can be written as
+\begin{equation}
+f(t) - p_n(t) =
+\frac{f^{(n+1)}(c)}{(n+1)!}\,
+\prod_{i=0}^{n} (t - t_i),
+\label{eq:interp_error}
+\end{equation}
+for some c in the interval containing the nodes and the point $t$.
+This formula shows that the error depends on both the spacing of the
+nodes and the (n+1) derivative of $f$. When the nodes are equally
+spaced and $n$ is large, the product term can lead to large oscillations
+near the ends of the interval (Runge's phenomenon).
+
+\subsection{Cubic Splines}
+To reduce the oscillations associated with high-degree polynomials, we
+use cubic splines. Given $n+1$ knots $t_0 < t_1 < \dots < t_n$ and
+function values $s_i = f(t_i)$, a cubic spline S(t) of the form,
+\begin{equation}
+S(t) =
+\begin{cases}
+S_0(t), & t \in [t_0,t_1], \\
+S_1(t), & t \in [t_1,t_2], \\
+\vdots \\
+S_{n-1}(t), & t \in [t_{n-1},t_n],
+\end{cases}
+\end{equation}
+where each $S_i(t)$ is a cubic polynomial
+\begin{equation}
+S_i(t) = a_i + b_i (t - t_i) + c_i (t - t_i)^2 + d_i (t - t_i)^3.
+\end{equation}
+The spline is constructed so that
+\begin{enumerate}
+\item $S(t_i) = s_i$ for $i = 0,\dots,n$ (interpolation),
+\item $S(t)$ is continuously differentiable, so $S'(t)$ is continuous at
+      each interior knot $t_1,\dots,t_{n-1}$,
+\item $S''(t)$ is continuous at each interior knot.
+\end{enumerate}
+These conditions yield $4n-2$ equations. Two additional conditions are
+needed at the endpoints. In this project, we use the \emph{natural
+cubic spline}, which imposes
+\begin{equation}
+S''(t_0) = 0, \qquad S''(t_n) = 0.
+\label{eq:natural_bc}
+\end{equation}
+Solving the resulting linear system produces the coefficients
+$a_i,b_i,c_i,d_i$ for all subintervals.
+
+\subsection{Numerical Differentiation}
+Once a smooth interpolating function $S(t)$ is available, the velocity
+and acceleration of the runner are given by
+\begin{equation}
+v(t) = S'(t), \qquad a(t) = S''(t).
+\label{eq:vel_acc}
+\end{equation}
+For spline models, derivatives can be computed analytically by
+differentiating the cubic expressions, or numerically using finite
+difference stencils.
+
+For comparison, numerical differentiation formulas can also be derived
+directly from discrete data. For example, the centered difference
+approximation for the first derivative at an interior node is
+\begin{equation}
+f'(t_i) \approx
+\frac{f(t_{i+1}) - f(t_{i-1})}{2h},
+\label{eq:centered_diff}
+\end{equation}
+where $h = t_{i+1} - t_i$ is the time step. This stencil is second
+order accurate in $h$.
+
+\section{Data and Preprocessing}
+The data for this project consist of split times and cumulative
+distances from a single distance runner's race. For example, in a 5k
+race, splits may be recorded every $1$ km, while in a 10k race splits
+may be recorded every mile. Let $t_i$ denote the elapsed time at the
+$i$th checkpoint and let $s_i$ denote the cumulative distance at this
+time.
+
+We perform the following preprocessing steps:
+\begin{enumerate}
+\item Convert all distances to meters and all times to seconds.
+\item Shift the time axis so that $t_0 = 0$ at the race start.
+\item Remove any obvious measurement errors such as negative time
+      differences between consecutive splits.
+\end{enumerate}
+The resulting dataset $\{(t_i, s_i)\}_{i=0}^n$ serves as the input to
+all interpolation methods.
+
+\section{Numerical Methods and Implementation}
+
+\subsection{Interpolation Models}
+We implement and compare the following models.
+\begin{enumerate}
+\item \textbf{Polynomial interpolation.}
+      We construct the Lagrange and Newton interpolating polynomials
+      using custom MATLAB functions based on
+      \eqref{eq:lagrange_poly}--\eqref{eq:newton_poly}. This approach
+      provides a baseline but is expected to be sensitive to node
+      spacing and prone to oscillations.
+
+\item \textbf{Natural cubic spline.}
+      We use MATLAB's \texttt{spline} command to construct the natural
+      cubic spline that satisfies \eqref{eq:natural_bc}. We also write
+      helper functions that evaluate $S(t)$, $S'(t)$, and $S''(t)$ using
+      the spline coefficients.
+\end{enumerate}
+
+\subsection{Velocity and Acceleration}
+For each interpolant $S(t)$, we compute the velocity and acceleration by
+differentiating the spline pieces analytically. For a cubic
+\[
+S_i(t) = a_i + b_i (t - t_i) + c_i (t - t_i)^2 + d_i (t - t_i)^3,
+\]
+the derivatives are
+\begin{equation}
+S_i'(t) = b_i + 2 c_i (t - t_i) + 3 d_i (t - t_i)^2,
+\label{eq:spline_first_deriv}
+\end{equation}
+\begin{equation}
+S_i''(t) = 2 c_i + 6 d_i (t - t_i).
+\label{eq:spline_second_deriv}
+\end{equation}
+Evaluating \eqref{eq:spline_first_deriv} and
+\eqref{eq:spline_second_deriv} on a fine time grid yields approximate
+velocity and acceleration profiles for the runner.
+
+\subsection{Accuracy Checks}
+We validate the interpolants in one main way.
+\begin{enumerate}
+\item \textbf{Checkpoint consistency.} For each method, we verify that
+      the interpolant reproduces the input distances at the original
+      split times, that is $S(t_i) \approx s_i$.
+\end{enumerate}
+
+\section{Results}
+
+\subsection{Position vs.\ Time}
+The first plot compares the Newton interpolating polynomial and the natural cubic spline against the original split data. Both interpolants pass exactly through the data points, and they are almost indistinguishable over most of the race. Near the final split, the polynomial begins to bend more sharply than the spline, while the spline stays slightly smoother.
+\\
+
+\subsection{Velocity and Acceleration Profiles}
+Differentiating each interpolant with the centered finite-difference formula gives the velocity curves. Both show an initial acceleration phase, a roughly steady middle section, and a decrease toward the end of the race. However, the polynomial-based velocity reaches larger peaks and drops off more steeply near the finish, while the spline-based velocity changes more gradually.
+\\
+
+The second derivative plots show the same pattern more clearly. The spline acceleration is small and slowly varying for most of the race, consistent with small adjustments in pace. The polynomial acceleration shows larger positive and negative swings, especially near the final split, which do not correspond to any obvious features in the original data.
+
+
+\section{Discussion}
+Because the Newton interpolating polynomial is a single degree-5 polynomial through all six points, small changes near the end of the interval affect the curve everywhere. This is the same phenomenon discussed in the interpolation error and Runge examples: high-degree polynomials with equally spaced nodes can oscillate, especially near the boundaries.
+\\
+
+The natural cubic spline instead uses a different cubic on each subinterval and enforces continuity of the function, first derivative, and second derivative. This local, piecewise structure explains why the spline trajectory and its derivatives are smoother and more physically reasonable, even though both methods agree exactly at the split times.
+\\
+
+The derivative plots show that the spline model leads to “nice” pacing behavior (smooth changes in speed and moderate accelerations), while the polynomial model suggests unrealistically large decelerations near the end. This supports the conclusion that spline interpolation is better suited than a single polynomial for modeling a runner’s race from discrete splits.
+
+\section{Conclusion and Future Work}
+This project demonstrates that spline interpolation is a useful tool
+for modeling a distance runner's race based on discrete split data.
+Among the methods tested, natural cubic spline interpolation
+produces the most realistic pacing curves. High-degree
+polynomials, while theoretically valid interpolants, are not practical
+for this application due to numerical instability and spurious
+oscillations.
+\\
+
+Future work could extend the current model by incorporating additional
+race information, such as elevation changes, or by exploring numerical
+integration methods once those techniques are introduced in class.
+
+\section*{References}
+\begin{enumerate}
+\item T.~Sauer, \emph{Numerical Analysis}, 3rd ed., Pearson, 2019.
+\item Course notes and lecture slides from MTH/CSC 4150, Fall 2025.
+\end{enumerate}
+
+\end{document}
