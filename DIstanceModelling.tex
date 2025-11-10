@@ -203,7 +203,7 @@ S_i''(t) = 2 c_i + 6 d_i (t - t_i).
 \label{eq:spline_second_deriv}
 \end{equation}
 Evaluating \eqref{eq:spline_first_deriv} and
-\eqref{eq:spline_second_deriv} on a fine time grid yields approximate
+\eqref{eq:spline_second_deriv} yields approximate
 velocity and acceleration profiles for the runner.
 
 \subsection{Accuracy Checks}
@@ -228,22 +228,14 @@ The second derivative plots show the same pattern more clearly. The spline accel
 
 
 \section{Discussion}
-Because the Newton interpolating polynomial is a single degree-5 polynomial through all six points, small changes near the end of the interval affect the curve everywhere. This is the same phenomenon discussed in the interpolation error and Runge examples: high-degree polynomials with equally spaced nodes can oscillate, especially near the boundaries.
-\\
-
-The natural cubic spline instead uses a different cubic on each subinterval and enforces continuity of the function, first derivative, and second derivative. This local, piecewise structure explains why the spline trajectory and its derivatives are smoother and more physically reasonable, even though both methods agree exactly at the split times.
-\\
-
-The derivative plots show that the spline model leads to “nice” pacing behavior (smooth changes in speed and moderate accelerations), while the polynomial model suggests unrealistically large decelerations near the end. This supports the conclusion that spline interpolation is better suited than a single polynomial for modeling a runner’s race from discrete splits.
+This supports the conclusion that spline interpolation is better suited than a single polynomial for modeling a runner’s race from discrete splits.
 
 \section{Conclusion and Future Work}
 This project demonstrates that spline interpolation is a useful tool
 for modeling a distance runner's race based on discrete split data.
 Among the methods tested, natural cubic spline interpolation
 produces the most realistic pacing curves. High-degree
-polynomials, while theoretically valid interpolants, are not practical
-for this application due to numerical instability and spurious
-oscillations.
+polynomials.
 \\
 
 Future work could extend the current model by incorporating additional
