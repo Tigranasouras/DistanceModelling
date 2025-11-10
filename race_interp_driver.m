@@ -85,7 +85,7 @@ legend('poly-based a(t)', 'spline-based a(t)', 'location', 'best');
 grid on;
 hold off;
 
-%% --- Very simple "accuracy" check (optional, qualitative) ---
-% Just compare how smooth the spline is vs. the polynomial in the plots.
-% You can discuss these differences in the Discussion section of your report.
+%% --- Simple "accuracy" check (optional) ---
+% Compare how smooth the spline is vs. the polynomial in the plots.
+% Discuss these differences in the Discussion section
 
