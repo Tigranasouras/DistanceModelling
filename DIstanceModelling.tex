@@ -45,13 +45,13 @@ pacing patterns.
 \subsection{Polynomial Interpolation}
 Suppose there are $n+1$ data points $(t_i, s_i)$ with distinct time
 values $t_0 < t_1 < \dots < t_n$. An interpolating polynomial
-$p_n(t)$ of degree n that satisfies
+$p_n(t)$ of degree at most $n$ satisfies
 \begin{equation}
 p_n(t_i) = s_i, \qquad i = 0,1,\dots,n.
 \label{eq:interp_condition}
 \end{equation}
-There exists a unique polynomial of at most n that satisfies
- the equation.
+There exists a unique polynomial of degree at most $n$ that satisfies
+\eqref{eq:interp_condition}.
 \\
 
 In the Lagrange form,
@@ -88,16 +88,14 @@ f(t) - p_n(t) =
 \prod_{i=0}^{n} (t - t_i),
 \label{eq:interp_error}
 \end{equation}
-for some c in the interval containing the nodes and the point $t$.
+for some $c$ in the interval containing the nodes and the point $t$.
 This formula shows that the error depends on both the spacing of the
-nodes and the (n+1) derivative of $f$. When the nodes are equally
+nodes and the $(n+1)$st derivative of $f$. When the nodes are equally
 spaced and $n$ is large, the product term can lead to large oscillations
 near the ends of the interval (Runge's phenomenon).
 
 \subsection{Cubic Splines}
-To reduce the oscillations associated with high-degree polynomials, we
-use cubic splines. Given $n+1$ knots $t_0 < t_1 < \dots < t_n$ and
-function values $s_i = f(t_i)$, a cubic spline S(t) of the form,
+To reduce the oscillations associated, we use cubic splines. Given $n+1$ knots $t_0 < t_1 < \dots < t_n$ and function values $s_i = f(t_i)$, a cubic spline $S(t)$ of the form
 \begin{equation}
 S(t) =
 \begin{cases}
@@ -188,7 +186,7 @@ We implement and compare the following models.
 \end{enumerate}
 
 \subsection{Velocity and Acceleration}
-For each interpolant $S(t)$, we compute the velocity and acceleration by
+For each $S(t)$, we compute the velocity and acceleration by
 differentiating the spline pieces analytically. For a cubic
 \[
 S_i(t) = a_i + b_i (t - t_i) + c_i (t - t_i)^2 + d_i (t - t_i)^3,
@@ -217,26 +215,68 @@ We validate the interpolants in one main way.
 \section{Results}
 
 \subsection{Position vs.\ Time}
-The first plot compares the Newton interpolating polynomial and the natural cubic spline against the original split data. Both interpolants pass exactly through the data points, and they are almost indistinguishable over most of the race. Near the final split, the polynomial begins to bend more sharply than the spline, while the spline stays slightly smoother.
-\\
+The first plot compares the Newton interpolating polynomial and the
+natural cubic spline against the original split data. Both methods
+pass exactly through the data points, and they are almost
+indistinguishable over most of the race. Near the final split, the
+polynomial begins to bend more sharply than the spline, while the spline
+stays slightly smoother.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\linewidth]{PosvsTime}
+  \caption{Cumulative distance versus time for each interpolation method.
+  Both interpolants pass through the split data, but the spline remains
+  slightly smoother near the end of the race.}
+  \label{fig:position}
+\end{figure}
 
 \subsection{Velocity and Acceleration Profiles}
-Differentiating each interpolant with the centered finite-difference formula gives the velocity curves. Both show an initial acceleration phase, a roughly steady middle section, and a decrease toward the end of the race. However, the polynomial-based velocity reaches larger peaks and drops off more steeply near the finish, while the spline-based velocity changes more gradually.
-\\
+Differentiating each gives the velocity curves. Both show an initial acceleration
+phase, a roughly steady middle section, and a decrease toward the end of
+the race. However, the polynomial-based velocity reaches larger peaks
+and drops off more steeply near the finish, while the spline-based
+velocity changes more gradually. -As we would expect to occur.
 
-The second derivative plots show the same pattern more clearly. The spline acceleration is small and slowly varying for most of the race, consistent with small adjustments in pace. The polynomial acceleration shows larger positive and negative swings, especially near the final split, which do not correspond to any obvious features in the original data.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\linewidth]{VelvsTime}
+  \caption{Velocity versus time obtained from the polynomial and spline
+  interpolants. The polynomial exhibits larger peaks and a sharper drop
+  near the finish compared to the spline.}
+  \label{fig:velocity}
+\end{figure}
 
+The second derivative plots show the same pattern more clearly. The
+spline acceleration is small and slowly varying for most of the race,
+consistent with small adjustments in pace. The polynomial acceleration
+shows larger positive and negative swings, especially near the final
+split, which do not correspond to any obvious features in the original
+data.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\linewidth]{AccelvsTime}
+  \caption{Acceleration versus time from each interpolant. The natural
+  cubic spline gives moderate, slowly varying accelerations, while the
+  polynomial shows oscillations that are less physically realistic.}
+  \label{fig:acceleration}
+\end{figure}
 
 \section{Discussion}
-This supports the conclusion that spline interpolation is better suited than a single polynomial for modeling a runner’s race from discrete splits.
+This supports the conclusion that spline interpolation is better suited
+than a single polynomial for modeling a runner’s race from discrete
+splits. The polynomial is highly sensitive to the placement of
+nodes and develops oscillations near the boundary, which leads to
+unrealistic behavior in the velocity and acceleration plots. In
+contrast, the natural cubic spline uses smoothness conditions, producing more physically reasonable pacing profiles.
 
 \section{Conclusion and Future Work}
 This project demonstrates that spline interpolation is a useful tool
 for modeling a distance runner's race based on discrete split data.
 Among the methods tested, natural cubic spline interpolation
-produces the most realistic pacing curves. High-degree
-polynomials.
-\\
+produces the most realistic pacing curves. High-degree polynomials can
+oscillate and generate unrealistic derivatives.
 
 Future work could extend the current model by incorporating additional
 race information, such as elevation changes, or by exploring numerical
