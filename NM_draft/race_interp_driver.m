@@ -1,10 +1,10 @@
 % race_interp_driver.m
 % MTH/CSC 4150 - Distance runner interpolation project
-% Uses Newton interpolating polynomial (newtondd.m) and a natural cubic
-% spline built with Sauer's Programs 3.5 / 3.6 style.
+% Uses Newton interpolating polynomial (newtondd.m), a natural cubic
+% spline, and a clamped cubic spline built with Sauer's Program 3.5 style.
 % Velocities/accelerations:
 %   - polynomial: finite differences (diff_central.m)
-%   - spline: analytic derivatives of cubic pieces (eval_spline_nat.m)
+%   - splines: analytic derivatives of cubic pieces (eval_spline_nat.m)
 
 clear; clc; close all;
 
@@ -12,8 +12,8 @@ clear; clc; close all;
 %   time in seconds (from 0:00:00 gun time)
 %   distance in meters (mile & km markers converted to meters)
 %
-% Splits used (3M, 5K, 4M, ..., MAR) come from the marathon times of
-% professor
+% Splits used (3M, 5K, 4M, ..., MAR) come from the
+%  marathon times of professor
 
 t_i = [ ...
       0, ...          % start
@@ -91,80 +91,98 @@ s_i = [ ...
 t_i = t_i(:).';
 s_i = s_i(:).';
 
-%% --- Set up evaluation grid ---
+%% Set up evaluation grid
 
 t_min  = t_i(1);
 t_max  = t_i(end);
 dt     = 0.5;                   % time step for plots & diffs (seconds)
 t_fine = t_min:dt:t_max;        % fine time grid
 
-%% --- Polynomial interpolation (Newton form via newtondd.m) ---
+%% Polynomial interpolation (Newton form via newtondd.m)
 
 % newtondd returns p(t_fine) and the coefficient vector c
-[s_poly, c_poly] = newtondd(t_fine, t_i, s_i);
+[s_poly, c_poly] = newtondd(t_fine, t_i, s_i); 
 
-%% --- Natural cubic spline via Sauer Program 3.5 style ---
+%% Natural cubic spline via Sauer Program 3.5 style
 
-coeff = splinecoeff_natural(t_i, s_i);                 % Program 3.5 (natural)
-[s_spline, v_spl_exact, a_spl_exact] = ...
-    eval_spline_nat(t_i, s_i, coeff, t_fine);          % like Program 3.6 + S', S''
+coeff_nat = splinecoeff_natural(t_i, s_i);
+[s_nat, v_nat, a_nat] = eval_spline_nat(t_i, s_i, coeff_nat, t_fine);
 
-%% --- Numerical differentiation (finite differences) for polynomial ONLY ---
+%% Clamped cubic spline via Sauer Program 3.5 (clamped endpoints)
+
+% Estimate endpoint velocities from one-sided differences
+v1 = (s_i(2)       - s_i(1))     / (t_i(2)       - t_i(1));       % left slope
+vn = (s_i(end)     - s_i(end-1)) / (t_i(end)     - t_i(end-1));   % right slope
+
+coeff_clamp = splinecoeff_clamped(t_i, s_i, v1, vn);
+[s_clamp, v_clamp, a_clamp] = eval_spline_nat(t_i, s_i, coeff_clamp, t_fine);
+
+%% Numerical differentiation (finite differences) for polynomial ONLY
 
 [v_poly, a_poly] = diff_central(t_fine, s_poly);
 
-%% --- Plot 1: Distance vs time ---
+%% Plot 1: Distance vs time
 
 figure(1); clf; hold on;
 colors = lines;
 
-plot(t_fine, s_poly,   'color', colors(1,:), 'linewidth', 3);
-plot(t_fine, s_spline, '--',    'color', colors(2,:), 'linewidth', 3);
+plot(t_fine, s_poly,    'color', colors(1,:), 'linewidth', 3);
+plot(t_fine, s_nat,    '--',     'color', colors(2,:), 'linewidth', 3);
+plot(t_fine, s_clamp,  ':',      'color', colors(4,:), 'linewidth', 3);
 plot(t_i,    s_i, 'o', 'color', colors(3,:), 'linewidth', 2, 'markersize', 8);
 
 set(gca, 'fontsize', 14);
 xlabel('time (s)');
 ylabel('distance (m)');
-title('Position vs. Time: Polynomial vs. Natural Cubic Spline');
-legend('Newton interpolating polynomial', 'Natural cubic spline', 'split data', ...
+title('Position vs. Time: Polynomial vs. Natural vs. Clamped Splines');
+legend('Newton interpolating polynomial', ...
+       'Natural cubic spline', ...
+       'Clamped cubic spline', ...
+       'split data', ...
        'location', 'northwest');
 grid on;
 hold off;
 
-%% --- Plot 2: Velocity vs time ---
+%% Plot 2: Velocity vs time
 
 figure(2); clf; hold on;
 
-plot(t_fine, v_poly,      'color', colors(1,:), 'linewidth', 3);
-plot(t_fine, v_spl_exact, '--',    'color', colors(2,:), 'linewidth', 3);
+plot(t_fine, v_poly,    'color', colors(1,:), 'linewidth', 3);
+plot(t_fine, v_nat,    '--',     'color', colors(2,:), 'linewidth', 3);
+plot(t_fine, v_clamp,  ':',      'color', colors(4,:), 'linewidth', 3);
 
 set(gca, 'fontsize', 14);
 xlabel('time (s)');
 ylabel('velocity (m/s)');
 title('Velocity vs. Time from Interpolants');
-legend('poly-based v(t) (finite diff)', 'spline-based v(t) (analytic)', ...
+legend('poly-based v(t) (finite diff)', ...
+       'natural spline v(t) (analytic)', ...
+       'clamped spline v(t) (analytic)', ...
        'location', 'best');
 grid on;
 hold off;
 
-%% --- Plot 3: Acceleration vs time ---
+%% Plot 3: Acceleration vs time
 
 figure(3); clf; hold on;
 
-plot(t_fine, a_poly,      'color', colors(1,:), 'linewidth', 3);
-plot(t_fine, a_spl_exact, '--',    'color', colors(2,:), 'linewidth', 3);
+plot(t_fine, a_poly,    'color', colors(1,:), 'linewidth', 3);
+plot(t_fine, a_nat,    '--',     'color', colors(2,:), 'linewidth', 3);
+plot(t_fine, a_clamp,  ':',      'color', colors(4,:), 'linewidth', 3);
 
 set(gca, 'fontsize', 14);
 xlabel('time (s)');
 ylabel('acceleration (m/s^2)');
 title('Acceleration vs. Time from Interpolants');
-legend('poly-based a(t) (finite diff)', 'spline-based a(t) (analytic)', ...
+legend('poly-based a(t) (finite diff)', ...
+       'natural spline a(t) (analytic)', ...
+       'clamped spline a(t) (analytic)', ...
        'location', 'best');
 grid on;
 hold off;
 
-%% --- Simple "accuracy" / behavior check (optional) ---
-% Compare how smooth the spline is vs. the polynomial in the plots.
-% Note in particular that the spline acceleration is ~0 at the endpoints,
-% as required by the natural boundary conditions, while the polynomial
-% acceleration exhibits larger endpoint spikes.
+%% Simple "accuracy" / behavior check (optional)
+% Compare how smooth the spline versions are vs. the polynomial in the plots.
+% Natural spline forces S''(t_0)=S''(t_n)=0, so its acceleration is ~0 at
+% the endpoints. The clamped spline matches the observed endpoint velocities
+% v1 and vn, so its acceleration is allowed to be nonzero at the start/finish.
