@@ -2,13 +2,6 @@ function coeff = splinecoeff_clamped(x, y, v1, vn)
 % splinecoeff_clamped
 % Sauer Program 3.5 with *clamped* endpoint conditions:
 %   S'(x_1) = v1,  S'(x_n) = vn
-%
-% INPUT:
-%   x, y : data vectors (x(1) < ... < x(n))
-%   v1   : desired slope at left endpoint
-%   vn   : desired slope at right endpoint
-% OUTPUT:
-%   coeff : (n-1 x 3) matrix of [b_i, c_i, d_i]
 
     n = length(x);
     A = zeros(n,n);
@@ -29,11 +22,11 @@ function coeff = splinecoeff_clamped(x, y, v1, vn)
     end
 
     % CLAMPED endpoint conditions (from Sauer)
-    A(1,1:2)     = [2*dx(1)  dx(1)];
-    r(1)         = 3*( dy(1)/dx(1) - v1 );
+    A(1,1:2)   = [2*dx(1)  dx(1)];
+    r(1)       = 3*( dy(1)/dx(1) - v1 );
 
-    A(n,n-1:n)   = [dx(n-1)  2*dx(n-1)];
-    r(n)         = 3*( vn - dy(n-1)/dx(n-1) );
+    A(n,n-1:n) = [dx(n-1)  2*dx(n-1)];
+    r(n)       = 3*( vn - dy(n-1)/dx(n-1) );
 
     coeff = zeros(n,3);
     coeff(:,2) = A \ r;                    % c_i

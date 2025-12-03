@@ -59,3 +59,5 @@ function [s_vals, v_vals, a_vals] = eval_spline_nat(x, y, coeff, t_query)
     v_vals = reshape(v_vals, size(t_query));
     a_vals = reshape(a_vals, size(t_query));
 end
+
+
