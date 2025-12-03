@@ -10,7 +10,7 @@
 function coeff = splinecoeff_natural(x, y)
 
     n = length(x);
-    v1 = 0; vn = 0;  %#ok<NASGU>  % not used for natural, but kept for book similarity
+    v1 = 0; vn = 0;  % not used for natural, but kept for book similarity -made it easier to translate
 
     A = zeros(n,n);
     r = zeros(n,1);
