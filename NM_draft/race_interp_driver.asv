@@ -155,7 +155,6 @@ plot(t_fine, v_clamp,  ':',      'color', colors(4,:), 'linewidth', 3);
 set(gca, 'fontsize', 14);
 xlabel('time (s)');
 ylabel('velocity (m/s)');
-ylim([3 7]);
 title('Velocity vs. Time from Interpolants');
 legend('poly-based v(t) (finite diff)', ...
        'natural spline v(t) (analytic)', ...
@@ -175,7 +174,6 @@ plot(t_fine, a_clamp,  ':',      'color', colors(4,:), 'linewidth', 3);
 set(gca, 'fontsize', 14);
 xlabel('time (s)');
 ylabel('acceleration (m/s^2)');
-ylim([-0.05 0.05]);
 title('Acceleration vs. Time from Interpolants');
 legend('poly-based a(t) (finite diff)', ...
        'natural spline a(t) (analytic)', ...
