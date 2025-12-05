@@ -6,33 +6,36 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2}Theoretical Background}{1}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Polynomial Interpolation}{1}{subsection.2.1}\protected@file@percent }
 \newlabel{eq:interp_condition}{{1}{1}{Polynomial Interpolation}{equation.2.1}{}}
-\newlabel{eq:lagrange_poly}{{2}{1}{Polynomial Interpolation}{equation.2.2}{}}
+\newlabel{eq:lagrange_poly}{{2}{2}{Polynomial Interpolation}{equation.2.2}{}}
 \newlabel{eq:lagrange_basis}{{3}{2}{Polynomial Interpolation}{equation.2.3}{}}
 \newlabel{eq:newton_poly}{{4}{2}{Polynomial Interpolation}{equation.2.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Interpolation Error}{2}{subsection.2.2}\protected@file@percent }
 \newlabel{eq:interp_error}{{5}{2}{Interpolation Error}{equation.2.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Cubic Splines}{2}{subsection.2.3}\protected@file@percent }
 \newlabel{eq:natural_bc}{{8}{3}{Cubic Splines}{equation.2.8}{}}
+\newlabel{eq:clamped_bc}{{9}{3}{Cubic Splines}{equation.2.9}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Numerical Differentiation}{3}{subsection.2.4}\protected@file@percent }
-\newlabel{eq:vel_acc}{{9}{3}{Numerical Differentiation}{equation.2.9}{}}
-\newlabel{eq:centered_diff}{{10}{3}{Numerical Differentiation}{equation.2.10}{}}
+\newlabel{eq:vel_acc}{{10}{3}{Numerical Differentiation}{equation.2.10}{}}
+\newlabel{eq:centered_diff}{{11}{3}{Numerical Differentiation}{equation.2.11}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Data and Preprocessing}{3}{section.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces NYC Marathon split times for Fiona O'Keeffe}}{4}{figure.1}\protected@file@percent }
-\newlabel{fig:position}{{1}{4}{NYC Marathon split times for Fiona O'Keeffe}{figure.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Numerical Methods and Implementation}{5}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Interpolation Models}{5}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Velocity and Acceleration}{5}{subsection.4.2}\protected@file@percent }
-\newlabel{eq:spline_first_deriv}{{11}{5}{Velocity and Acceleration}{equation.4.11}{}}
-\newlabel{eq:spline_second_deriv}{{12}{5}{Velocity and Acceleration}{equation.4.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces NYC Marathon split times for Fiona O'Keeffe.}}{4}{figure.1}\protected@file@percent }
+\newlabel{fig:splits}{{1}{4}{NYC Marathon split times for Fiona O'Keeffe}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Numerical Methods and Implementation}{4}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Interpolation Models}{4}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Velocity and Acceleration}{4}{subsection.4.2}\protected@file@percent }
+\newlabel{eq:spline_first_deriv}{{12}{4}{Velocity and Acceleration}{equation.4.12}{}}
+\newlabel{eq:spline_second_deriv}{{13}{4}{Velocity and Acceleration}{equation.4.13}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Accuracy Checks}{5}{subsection.4.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5}Results}{5}{section.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Position vs.\ Time}{5}{subsection.5.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Cumulative distance versus time for each interpolation method.}}{6}{figure.2}\protected@file@percent }
-\newlabel{fig:position}{{2}{6}{Cumulative distance versus time for each interpolation method}{figure.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Velocity and Acceleration Profiles}{6}{subsection.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Cumulative distance versus time for the Newton polynomial, natural spline, and clamped spline, together with the original split data.}}{6}{figure.2}\protected@file@percent }
+\newlabel{fig:position}{{2}{6}{Cumulative distance versus time for the Newton polynomial, natural spline, and clamped spline, together with the original split data}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Velocity Profiles}{6}{subsection.5.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Velocity versus time obtained from the polynomial and spline interpolations.}}{7}{figure.3}\protected@file@percent }
 \newlabel{fig:velocity}{{3}{7}{Velocity versus time obtained from the polynomial and spline interpolations}{figure.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Acceleration versus time from each interpolation.}}{8}{figure.4}\protected@file@percent }
-\newlabel{fig:acceleration}{{4}{8}{Acceleration versus time from each interpolation}{figure.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{8}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Acceleration Profiles}{7}{subsection.5.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Acceleration versus time from each interpolation method.}}{8}{figure.4}\protected@file@percent }
+\newlabel{fig:acceleration}{{4}{8}{Acceleration versus time from each interpolation method}{figure.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{9}{section.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion and Future Work}{9}{section.7}\protected@file@percent }
+\gdef \@abspage@last{10}

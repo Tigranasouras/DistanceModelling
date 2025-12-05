@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.10)  4 DEC 2025 23:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.10)  5 DEC 2025 00:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -411,185 +411,98 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 25.
 (C:\Users\daron\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 44--48
-
- []
-
 [1
 
-{C:/Users/daron/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 59--62
-
- []
-
-[2]
-Overfull \hbox (5.05768pt too wide) in paragraph at lines 107--109
+{C:/Users/daron/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
+Overfull \hbox (5.05768pt too wide) in paragraph at lines 132--134
 []$\OML/cmm/m/it/12 S\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 )$ is c
 on-tin-u-ously dif-fer-en-tiable, so $\OML/cmm/m/it/12 S[]\OT1/cmr/m/n/12 (\OML
 /cmm/m/it/12 t\OT1/cmr/m/n/12 )$ is con-tin-u-ous at each in-te-rior knot $\OML
 /cmm/m/it/12 t[]; [] ; t[]$\OT1/cmr/m/n/12 , 
  []
 
-
-LaTeX Warning: Reference `fig:splits' on page 3 undefined on input line 156.
-
 [3]
-
-LaTeX Warning: Reference `eq:lagrange_poly' on page 4 undefined on input line 1
-85.
-
-
-LaTeX Warning: Reference `eq:newton_poly' on page 4 undefined on input line 185
-.
-
-
-LaTeX Warning: Reference `eq:natural_bc' on page 4 undefined on input line 191.
+<NYRR_splits.png, id=120, 1183.42125pt x 2565.585pt>
+File: NYRR_splits.png Graphic file (type png)
+<use NYRR_splits.png>
+Package pdftex.def Info: NYRR_splits.png  used on input line 200.
+(pdftex.def)             Requested size: 399.29463pt x 865.6323pt.
+ [4]
+Overfull \vbox (260.24385pt too high) has occurred while \output is active []
 
 
-
-LaTeX Warning: Reference `eq:clamped_bc' on page 4 undefined on input line 195.
-
-
-
-LaTeX Warning: Reference `eq:spline_first_deriv' on page 4 undefined on input l
-ine 213.
-
-
-LaTeX Warning: Reference `eq:spline_second_deriv' on page 4 undefined on input 
-line 214.
+[5 <./NYRR_splits.png>]
+Overfull \hbox (50.26695pt too wide) in paragraph at lines 235--241
+[]\OT1/cmr/bx/n/12 Natural cu-bic spline. \OT1/cmr/m/n/12 We build a nat-u-ral 
+cu-bic spline us-ing a rou-tine \OT1/cmtt/m/n/12 splinecoeff[]natural.m\OT1/cmr
+/m/n/12 ,
+ []
 
 
-LaTeX Warning: Reference `eq:centered_diff' on page 4 undefined on input line 2
-17.
-
-[4]
-
-LaTeX Warning: Reference `fig:position' on page 5 undefined on input line 230.
-
-
-LaTeX Warning: File `PosvTime.pdf' not found on input line 238.
-
-
-! Package pdftex.def Error: File `PosvTime.pdf' not found: using draft setting.
-
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.238 ...phics[width=0.85\linewidth]{PosvTime.pdf}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[5]
-
-LaTeX Warning: Reference `fig:velocity' on page 6 undefined on input line 244.
+Overfull \hbox (13.1577pt too wide) in paragraph at lines 235--241
+\OT1/cmr/m/n/12 fol-low-ing the struc-ture of Sauer's Pro-gram 3.5. A com-pan-i
+on func-tion \OT1/cmtt/m/n/12 eval[]spline[]nat.m
+ []
 
 [6]
-
-LaTeX Warning: File `VelvTime.pdf' not found on input line 252.
-
-
-! Package pdftex.def Error: File `VelvTime.pdf' not found: using draft setting.
-
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.252 ...phics[width=0.85\linewidth]{VelvTime.pdf}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Reference `fig:acceleration' on page 7 undefined on input line 2
-58.
-
-[7]
-
-LaTeX Warning: File `AccelvTime.pdf' not found on input line 268.
-
-
-! Package pdftex.def Error: File `AccelvTime.pdf' not found: using draft settin
-g.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.268 ...ics[width=0.85\linewidth]{AccelvTime.pdf}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Reference `fig:velocity' on page 8 undefined on input line 274.
-
-[8]
-
-LaTeX Warning: Reference `fig:acceleration' on page 9 undefined on input line 2
-76.
-
-[9]
-Overfull \hbox (52.54779pt too wide) in paragraph at lines 292--293
-\OT1/cmr/m/n/12 ning Per-for-mance. \OT1/cmr/m/it/12 Sports Medicine In-ter-na-
-tional Open\OT1/cmr/m/n/12 , 8, a24016234. https://doi.org/10.1055/a-
- []
-
-
-Overfull \hbox (39.6577pt too wide) in paragraph at lines 296--297
-\OT1/cmr/m/it/12 Fin-ish-ers re-sults\OT1/cmr/m/n/12 . []$\OT1/cmtt/m/n/12 http
-s : / / results . nyrr . org / event / M2025 / result / 108 ? _gl = 1*1ptu7wj* 
-_
- []
-
-[10] (mainEdit1.aux)
+<PosvTime.png, id=147, 705.5961pt x 452.4102pt>
+File: PosvTime.png Graphic file (type png)
+<use PosvTime.png>
+Package pdftex.def Info: PosvTime.png  used on input line 322.
+(pdftex.def)             Requested size: 399.29463pt x 256.01262pt.
+ [7]
+<VelvTime.png, id=159, 705.5961pt x 452.4102pt>
+File: VelvTime.png Graphic file (type png)
+<use VelvTime.png>
+Package pdftex.def Info: VelvTime.png  used on input line 358.
+(pdftex.def)             Requested size: 399.29463pt x 256.01262pt.
+ [8 <./PosvTime.png (PNG copy)>]
+<AccelvTime.png, id=166, 705.5961pt x 452.4102pt>
+File: AccelvTime.png Graphic file (type png)
+<use AccelvTime.png>
+Package pdftex.def Info: AccelvTime.png  used on input line 394.
+(pdftex.def)             Requested size: 399.29463pt x 256.01262pt.
+ [9 <./VelvTime.png (PNG copy)>]
+[10 <./AccelvTime.png (PNG copy)>] [11] [12] (mainEdit1.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-
-Package rerunfilecheck Warning: File `mainEdit1.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `mainEdit1.out':
-(rerunfilecheck)             Before: 06F3488A7F68CB2AAA9CF2A7465E01CF;439
-(rerunfilecheck)             After:  ED5FFF1EC113E12C72585E7C5FB6C4EB;2597.
+Package rerunfilecheck Info: File `mainEdit1.out' has not changed.
+(rerunfilecheck)             Checksum: ED5FFF1EC113E12C72585E7C5FB6C4EB;2597.
  ) 
 Here is how much of TeX's memory you used:
- 10335 strings out of 474486
- 159552 string characters out of 5743755
+ 10311 strings out of 474486
+ 158689 string characters out of 5743755
  1935542 words of memory out of 5000000
- 32439 multiletter control sequences out of 15000+600000
- 567348 words of font info for 72 fonts, out of 8000000 for 9000
+ 32408 multiletter control sequences out of 15000+600000
+ 568498 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,79p,644b,524s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/daron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmbx12.pfb><C:/Users/daron/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmex10.pfb><C:/Users/daron/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmmi12.pfb><C:/Users/daron/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/daron/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/daron/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/daron/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/daron/App
-Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/
-daron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C
-:/Users/daron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti
-12.pfb><C:/Users/daron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
-s/cm/cmtt12.pfb>
-Output written on mainEdit1.pdf (10 pages, 177554 bytes).
+ 75i,8n,79p,283b,447s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\daron\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
+1200.pk><C:/Users/daron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmbx12.pfb><C:/Users/daron/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmex10.pfb><C:/Users/daron/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmmi12.pfb><C:/Users/daron/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/daron/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/daron/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/daron/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/da
+ron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/U
+sers/daron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pf
+b><C:/Users/daron/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmsy10.pfb><C:/Users/daron/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmsy8.pfb><C:/Users/daron/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmti12.pfb><C:/Users/daron/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/daron/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on mainEdit1.pdf (12 pages, 1209574 bytes).
 PDF statistics:
- 181 PDF objects out of 1000 (max. 8388607)
- 61 named destinations out of 1000 (max. 500000)
- 25 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 269 PDF objects out of 1000 (max. 8388607)
+ 64 named destinations out of 1000 (max. 500000)
+ 157 words of extra memory for PDF output out of 10000 (max. 10000000)
 

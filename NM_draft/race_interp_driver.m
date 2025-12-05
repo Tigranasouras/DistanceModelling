@@ -184,6 +184,10 @@ legend('poly-based a(t) (finite diff)', ...
 grid on;
 hold off;
 
+exportgraphics(gcf,'PosvTime.png','Resolution',300)
+exportgraphics(gcf,'VelvTime.png','Resolution',300)
+exportgraphics(gcf,'AccelvTime.png','Resolution',300)
+
 %% Simple "accuracy" / behavior check (optional)
 % Compare how smooth the spline versions are vs. the polynomial in the plots.
 % Natural spline forces S''(t_0)=S''(t_n)=0, so its acceleration is ~0 at
