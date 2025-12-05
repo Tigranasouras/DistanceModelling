@@ -37,13 +37,11 @@ In this project, we model a runner's cumulative race distance as a function of
 time, denoted by $s(t)$. From this interpolated position function, we approximate
 the instantaneous velocity $v(t)$ and acceleration $a(t)$. We compare three
 interpolation approaches studied in class:
-
 \begin{itemize}
   \item a Newton interpolating polynomial,
   \item a natural cubic spline,
   \item a clamped cubic spline.
 \end{itemize}
-
 We examine how the choice of interpolant and the boundary conditions affect the
 estimated velocity and acceleration curves and how well each method captures
 realistic pacing patterns over the course of a marathon.
@@ -101,14 +99,16 @@ nodes $t_0,\dots,t_n$. The interpolation error can be written as
 \end{equation}
 for some $c$ in the interval containing the nodes and the point $t$.
 This formula shows that the error depends on both the spacing of the
-nodes and the $(n+1)$st derivative of $f(t)$. When the nodes are equally
-spaced and $n$ is large, the product term can lead to large oscillations
-near the ends of the interval (Runge's phenomenon).
+nodes and the $(n+1)$ derivative of $f(t)$. When the nodes are equally
+spaced and $n$ is large, the product $\prod_{i=0}^{n}(t-t_i)$ becomes
+large near the ends of the interval, so any oscillations in the high--degree
+interpolating polynomial translate into large interpolation errors near
+the endpoints (Runge's phenomenon).
 
 \subsection{Cubic Splines}
 
 To reduce the oscillations associated with high-degree polynomials, we
-use cubic splines. Given $n+1$ knots $t_0<t_1<\dots< t_n$ and function
+use cubic splines. Given $n+1$ knots $t_0 < t_1 < \dots < t_n$ and function
 values $s_i = f(t_i)$, a cubic spline $S(t)$ is a piecewise cubic
 polynomial of the form
 \begin{equation}
@@ -127,8 +127,8 @@ where each piece has the form
 \end{equation}
 The spline is constructed so that
 \begin{enumerate}
-  \item $S(t_i) = s_i$ and $S(t_{i+1}) = s_{i+1}$ for $i = 0,\dots,n-1$
-        (interpolation),
+  \item $S(t_i) = s_i$ for $i = 0,\dots,n$, so $S(t)$ is continuous at
+        each knot and interpolates all of the data,
   \item $S(t)$ is continuously differentiable, so $S'(t)$ is continuous at
         each interior knot $t_1,\dots,t_{n-1}$,
   \item $S''(t)$ is continuous at each interior knot.
@@ -193,6 +193,7 @@ York Road Runners results website. The runner is a recreational female
 participant (our professor's sister-in-law), which provides a realistic,
 non-elite pacing profile for a full marathon. The splits include a mix
 of mile and kilometer markers, which are converted to consistent units.
+Figure~\ref{fig:splits} displays the official split times for this runner.
 
 \begin{figure}[H]
   \centering
@@ -215,7 +216,10 @@ We perform the following preprocessing steps:
 \end{enumerate}
 The resulting data $\{(t_i, s_i)\}_{i=0}^n$ serve as the input to
 all interpolation methods. These same processed values appear in the
-MATLAB driver script used to generate our figures.
+MATLAB driver script used to generate our figures. In total there are
+$n+1$ checkpoints (including the start and the finish), corresponding to
+standard marathon timing mats; they are not equally spaced in either
+time or distance.
 
 \section{Numerical Methods and Implementation}
 
@@ -425,13 +429,17 @@ behavior. Its velocity and acceleration profiles align more consistently
 with observed race dynamics than either the natural spline or the
 polynomial interpolant.
 
-Overall, while all methods reconstruct the position data accurately, the
-differentiation process magnifies modeling assumptions. The results
-demonstrate that careful selection of spline boundary conditions is
-essential when derivative quantities such as velocity and acceleration
-are of primary interest. Among the interpolants tested, the clamped
-cubic spline provides the most balanced and physically realistic
-representation of the runner's pacing profile.
+For the runner we model, all three interpolants agree that the pace is
+nearly constant through the middle portion of the marathon with a modest
+increase in speed near the finish, a pattern consistent with a
+well-controlled race followed by a final push. Overall, while all
+methods reconstruct the position data accurately, the differentiation
+process magnifies modeling assumptions. The results demonstrate that
+careful selection of spline boundary conditions is essential when
+derivative quantities such as velocity and acceleration are of primary
+interest. Among the interpolants tested, the clamped cubic spline
+provides the most balanced and physically realistic representation of
+the runner's pacing profile.
 
 \section{Conclusion and Future Work}
 
